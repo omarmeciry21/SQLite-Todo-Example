@@ -42,6 +42,11 @@ create table $todoTable (
     return await db.delete(todoTable, where: '$columnId = ?', whereArgs: [id]);
   }
 
+  Future<int> updateTodo(Todo todo) async {
+    return await db.update(todoTable, todo.toMap(),
+        where: '$columnId = ?', whereArgs: [todo.id]);
+  }
+
   Future<List<Todo>> getAllTodo() async {
     List<Map<String, dynamic>> todoMaps = await db.query(todoTable);
     if (todoMaps.length == 0)

@@ -71,9 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: ListTile(
                         leading: Checkbox(
                           value: todo.isChecked,
-                          onChanged: (bool? value) {
+                          onChanged: (bool? value) async{
+                            todoList[index].isChecked = value!;
+                            await TodoProvider.instance.updateTodo(todoList[index]);
                             setState(() {
-                              todoList[index].isChecked = value!;
                             });
                           },
                         ),
